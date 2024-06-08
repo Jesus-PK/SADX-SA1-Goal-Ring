@@ -17,7 +17,7 @@ extern "C"
 		
 		//	Init Mod:
 
-		
+		LOAD_GoalRing();
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };
