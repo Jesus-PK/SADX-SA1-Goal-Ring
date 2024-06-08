@@ -36,8 +36,9 @@ void DISPLAY_GoalRing(task* tp)
     njTranslate(0, twp->pos.x, twp->pos.y + 5.0f, twp->pos.z);
     njRotateXYZ(0, twp->ang.x, twp->ang.y, twp->ang.z);
     
-    DrawModel(MDL_GoalRing->getmodel()->basicdxmodel);
-    late_DrawModel(MDL_GoalRing->getmodel()->child->basicdxmodel, LATE_LIG);
+    DrawModel(MDL_GoalRing->getmodel()->basicdxmodel); // Outer Ring
+    late_DrawModel(MDL_GoalRing->getmodel()->child->basicdxmodel, LATE_LIG); // Inner Ring (Background)
+    late_DrawModel(MDL_GoalRing->getmodel()->child->sibling->basicdxmodel, LATE_LIG); // Inner Ring (Text)
     
     njPopMatrix(1u);
 }
