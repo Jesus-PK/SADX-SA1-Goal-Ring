@@ -10,6 +10,8 @@ NJS_TEXLIST TEXLIST_GoalRing = { arrayptrandlength(TEX_GoalRing) };
 
 ModelInfo* MDL_GoalRing = nullptr;
 
+CCL_INFO COL_GoalRing = { 0, 0x0, 0xF0, 0x20, 0x400, { 0.0f, 17.5f, 0.0f }, 8.0f, 0.0f, 0.0f, 0.0f, 0, 0, 0 };
+
 NJS_POINT3 POS_GoalTrigger = { 0, 0, 0 };
 
 
@@ -29,10 +31,11 @@ void DISPLAY_GoalRing(task* tp)
     
     njPushMatrix(0);
     
-    njTranslateV(0, &twp->pos);
+    njTranslate(0, twp->pos.x, twp->pos.y + 5.0f, twp->pos.z);
     njRotateXYZ(0, twp->ang.x, twp->ang.y, twp->ang.z);
     
-    dsDrawObject(MDL_GoalRing->getmodel());
+    DrawModel(MDL_GoalRing->getmodel()->basicdxmodel);
+    late_DrawModel(MDL_GoalRing->getmodel()->child->basicdxmodel, LATE_LIG);
     
     njPopMatrix(1u);
 }
@@ -48,8 +51,10 @@ void EXEC_GoalRing(task* tp)
     {
         case 0:
 
+            CCL_Init(tp, &COL_GoalRing, 1, 2u);
+            
             POS_GoalTrigger.x = twp->pos.x;
-            POS_GoalTrigger.y = twp->pos.y + 10.25f;
+            POS_GoalTrigger.y = twp->pos.y + 17.5f;
             POS_GoalTrigger.z = twp->pos.z;
 
             twp->mode++;
@@ -62,7 +67,7 @@ void EXEC_GoalRing(task* tp)
 
             if (CurrentCharacter == Characters_Tails)
             {
-                switch (CheckCollisionP(&POS_GoalTrigger, 12.0f))
+                switch (CheckCollisionP(&POS_GoalTrigger, 15.0f))
                 {
                     case 0: // NO - Player ISN'T on sphere.
                         break;
@@ -79,11 +84,13 @@ void EXEC_GoalRing(task* tp)
                 }
             }
 
-            else if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
+            else if (CheckCollisionP(&POS_GoalTrigger, 15.0f))
             {
                 LoadLevelResults();
                 twp->mode = 2;
             }
+
+            EntryColliList(twp);
 
             /*
             if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
