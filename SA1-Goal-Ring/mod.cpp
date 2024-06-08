@@ -18,6 +18,7 @@ extern "C"
 		//	Init Mod:
 
 		LOAD_GoalRing();
+		INIT_Graphics();
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };

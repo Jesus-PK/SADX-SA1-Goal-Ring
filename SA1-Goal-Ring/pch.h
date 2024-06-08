@@ -10,6 +10,7 @@
 	#include "mod.h"
 
 	#include "goalring.h"
+	#include "graphics.h"
 	#include "utils.h"
 
 #endif
