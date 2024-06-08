@@ -12,7 +12,7 @@ PVMEntry PVM_GoalRing = { "SA1_GoalRing", &TEXLIST_GoalRing };
 
 ModelInfo* MDL_GoalRing = nullptr;
 
-CCL_INFO COL_GoalRing = { 0, 0x0, 0xF0, 0x20, 0x400, { 0.0f, 17.5f, 0.0f }, 8.0f, 0.0f, 0.0f, 0.0f, 0, 0, 0 };
+CCL_INFO COL_GoalRing = { 0, CollisionShape_Sphere, 0xF0, 0x20, 0x400, { 0.0f, 17.5f, 0.0f }, 8.0f, 0.0f, 0.0f, 0.0f, 0, 0, 0 };
 
 NJS_POINT3 POS_GoalTrigger = { 0, 0, 0 };
 
@@ -65,23 +65,32 @@ void EXEC_GoalRing(task* tp)
 
         case 1:
 
-            twp->ang.y += 500;
-
             if (CurrentCharacter == Characters_Tails)
             {
                 switch (CheckCollisionP(&POS_GoalTrigger, 15.0f))
                 {
                     case 0: // NO - Player ISN'T on sphere.
+                        
                         break;
+                    
                     case 1: // YES - Player IS on sphere.
+                        
                         SetTailsRaceVictory();
+                        
                         LoadLevelResults();
+                        
                         twp->mode = 2;
+                        
                         break;
+                    
                     default: // Default kicks in when Sonk catches the goal ring before Tails.
+                        
                         SetOpponentRaceVictory();
+                        
                         LoadLevelResults();
+                        
                         twp->mode = 2;
+                        
                         break;
                 }
             }
@@ -89,29 +98,13 @@ void EXEC_GoalRing(task* tp)
             else if (CheckCollisionP(&POS_GoalTrigger, 15.0f))
             {
                 LoadLevelResults();
+                
                 twp->mode = 2;
             }
 
+            twp->ang.y += 500;
+            
             EntryColliList(twp);
-
-            /*
-            if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
-            {
-                if (CurrentCharacter == Characters_Tails)
-                {
-                    SetTailsRaceVictory();
-                    LoadLevelResults();
-
-                    twp->mode = 2;
-                }
-
-                else
-                {
-                    LoadLevelResults();
-
-                    twp->mode = 2;
-                }
-            }*/
 
             break;
     }
@@ -128,15 +121,13 @@ void INIT_GoalRing(task* tp)
 }
 
 
-
-
 //	Goal Ring - Load Assets:
 
 void LOAD_GoalRing()
 {
 	MDL_GoalRing = LoadBasicModel("SA1_GoalRing");
 
-    HelperFunctionsGlobal.RegisterCommonObjectPVM(PVM_GoalRing);
+    HelperFunctionsGlobal.RegisterCommonObjectPVM(PVM_GoalRing); // Registers the Goal Ring PVM to the Common Objects PVM list.
 
     WriteJump((void*)0x46B170, INIT_GoalRing); // Replace Capsule Main Function
 }
