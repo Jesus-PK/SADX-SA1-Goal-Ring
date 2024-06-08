@@ -5,6 +5,8 @@
 NJS_TEXNAME TEX_GoalRing[3] = { 0 };
 NJS_TEXLIST TEXLIST_GoalRing = { arrayptrandlength(TEX_GoalRing) };
 
+PVMEntry PVM_GoalRing = { "SA1_GoalRing", &TEXLIST_GoalRing };
+
 
 //	Models & Collision:
 
@@ -123,9 +125,9 @@ void INIT_GoalRing(task* tp)
 
     tp->exec = EXEC_GoalRing;
     tp->disp = DISPLAY_GoalRing;
-
-    LoadPVM("SA1_GoalRing", &TEXLIST_GoalRing);
 }
+
+
 
 
 //	Goal Ring - Load Assets:
@@ -133,6 +135,8 @@ void INIT_GoalRing(task* tp)
 void LOAD_GoalRing()
 {
 	MDL_GoalRing = LoadBasicModel("SA1_GoalRing");
+
+    HelperFunctionsGlobal.RegisterCommonObjectPVM(PVM_GoalRing);
 
     WriteJump((void*)0x46B170, INIT_GoalRing); // Replace Capsule Main Function
 }
