@@ -60,12 +60,49 @@ void EXEC_GoalRing(task* tp)
 
             twp->ang.y += 500;
 
-            if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
+            if (CurrentCharacter == Characters_Tails)
+            {
+                switch (CheckCollisionP(&POS_GoalTrigger, 12.0f))
+                {
+                    case 0: // NO - Player ISN'T on sphere.
+                        break;
+                    case 1: // YES - Player IS on sphere.
+                        SetTailsRaceVictory();
+                        LoadLevelResults();
+                        twp->mode = 2;
+                        break;
+                    default: // Default kicks in when Sonk catches the goal ring before Tails.
+                        SetOpponentRaceVictory();
+                        LoadLevelResults();
+                        twp->mode = 2;
+                        break;
+                }
+            }
+
+            else if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
             {
                 LoadLevelResults();
-
                 twp->mode = 2;
             }
+
+            /*
+            if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
+            {
+                if (CurrentCharacter == Characters_Tails)
+                {
+                    SetTailsRaceVictory();
+                    LoadLevelResults();
+
+                    twp->mode = 2;
+                }
+
+                else
+                {
+                    LoadLevelResults();
+
+                    twp->mode = 2;
+                }
+            }*/
 
             break;
     }
