@@ -12,7 +12,7 @@ extern "C"
 		ModPath = path;
 		HelperFunctionsGlobal = helperFunctions;
 
-		
+		CheckActiveMods();
 
 		
 		//	Init Mod:

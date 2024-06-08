@@ -17,17 +17,3 @@ void CheckActiveMods();
 //	Functions for loading Models and Animations:
 
 ModelInfo* LoadBasicModel(const char* name);
-
-
-//	CollisionShapes enums:
-
-enum CollisionShapes
-{
-	CollisionShape_Sphere,		// A		|	(Radius)
-	CollisionShape_Cylinder,	// A, B		|	(Radius, Height)
-	CollisionShape_Cylinder2,	// A, B		|	(Radius, Height)
-	CollisionShape_Cube,		// A, B, C	|	(XYZ Scale)
-	CollisionShape_Cube2,		// A, B, C	|	(XYZ Scale - Support YZ rotation)
-	CollisionShape_Capsule = 6,	// A, B		|	(Radius, Height - Support XYZ rotation - Cylinder with rounded ends that can't be walked on),
-	CollisionShape_PushWall = 9	// A, B, C	|	(Width, Height, Power - A wall that pushes the player - Support Y rotation)
-};

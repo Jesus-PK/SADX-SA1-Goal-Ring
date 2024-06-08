@@ -1,13 +1,16 @@
 #include "pch.h"
 
+//  Textures:
+
 NJS_TEXNAME TEX_GoalRing[3] = { 0 };
 NJS_TEXLIST TEXLIST_GoalRing = { arrayptrandlength(TEX_GoalRing) };
+
 
 //	Models & Collision:
 
 ModelInfo* MDL_GoalRing = nullptr;
 
-NJS_POINT3 POS_ExitTrigger = { 0, 0, 0 };
+NJS_POINT3 POS_GoalTrigger = { 0, 0, 0 };
 
 
 //	Goal Ring - Main:
@@ -18,6 +21,9 @@ void DISPLAY_GoalRing(task* tp)
         return;
 
     auto twp = tp->twp;
+
+    if (twp->mode == 2)
+        return;
 
     njSetTexture(&TEXLIST_GoalRing);
     
@@ -42,9 +48,9 @@ void EXEC_GoalRing(task* tp)
     {
         case 0:
 
-            POS_ExitTrigger.x = twp->pos.x;
-            POS_ExitTrigger.y = twp->pos.y + 10.25f;
-            POS_ExitTrigger.z = twp->pos.z;
+            POS_GoalTrigger.x = twp->pos.x;
+            POS_GoalTrigger.y = twp->pos.y + 10.25f;
+            POS_GoalTrigger.z = twp->pos.z;
 
             twp->mode++;
 
@@ -54,7 +60,7 @@ void EXEC_GoalRing(task* tp)
 
             twp->ang.y += 500;
 
-            if (CheckCollisionP(&POS_ExitTrigger, 12.0f))
+            if (CheckCollisionP(&POS_GoalTrigger, 12.0f))
             {
                 LoadLevelResults();
 
