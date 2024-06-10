@@ -34,7 +34,7 @@ void DISPLAY_GoalRing(task* tp)
     njPushMatrix(0);
     
     njTranslate(0, twp->pos.x, twp->pos.y + 5.0f, twp->pos.z);
-    njRotateXYZ(0, twp->ang.x, twp->ang.y, twp->ang.z);
+    njRotateXYZ(0, twp->ang.x, -twp->ang.y, twp->ang.z);
     
     DrawModel(MDL_GoalRing->getmodel()->basicdxmodel); // Outer Ring
     late_DrawModel(MDL_GoalRing->getmodel()->child->basicdxmodel, LATE_LIG); // Inner Ring (Background)
@@ -70,11 +70,11 @@ void EXEC_GoalRing(task* tp)
             {
                 switch (CheckCollisionP(&POS_GoalTrigger, 15.0f))
                 {
-                    case 0: // NO - Player ISN'T on sphere.
+                    case 0: // Returns 0 - Nobody is on the sphere.
                         
                         break;
                     
-                    case 1: // YES - Player IS on sphere.
+                    case 1: // Return 1 - Player ID 1 is on the sphere.
                         
                         SetTailsRaceVictory();
                         
@@ -84,7 +84,7 @@ void EXEC_GoalRing(task* tp)
                         
                         break;
                     
-                    default: // Default kicks in when Sonk catches the goal ring before Tails.
+                    default: // Returns 2 - Player ID 2 is on the sphere (Sonk AI).
                         
                         SetOpponentRaceVictory();
                         
@@ -102,6 +102,8 @@ void EXEC_GoalRing(task* tp)
                 
                 twp->mode = 2;
             }
+
+            DrawShadow((EntityData1*)twp, 1.0f);
 
             twp->ang.y += 500;
             
