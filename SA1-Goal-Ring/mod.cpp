@@ -19,6 +19,12 @@ extern "C"
 
 		LOAD_GoalRing();
 		INIT_Graphics();
+
+		
+		//	TESTING PURPOSES - PENDING REMOVAL:
+
+		StartPosition STARTPOS_TreeTops00 = { LevelIDs_SkyDeck, 0, { 885.0f, -330.0f, 5478.0f }, 0x0 };
+		HelperFunctionsGlobal.RegisterStartPosition(Characters_Tails, STARTPOS_TreeTops00);
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };
