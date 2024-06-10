@@ -19,6 +19,14 @@ void CheckActiveMods();
 ModelInfo* LoadBasicModel(const char* name);
 
 
+//  Functions for a custom Sphere check:
+
+#define PLAYER_MAX 4
+
+float GetDistance(NJS_VECTOR* v1, NJS_VECTOR* v2);
+int IsPlayerInSphere(NJS_POINT3* p, float r);
+
+
 //	CollisionShapes enums:
 
 enum CollisionShapes

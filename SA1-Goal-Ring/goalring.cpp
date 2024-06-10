@@ -68,7 +68,7 @@ void EXEC_GoalRing(task* tp)
 
             if (CurrentCharacter == Characters_Tails)
             {
-                switch (CheckCollisionP(&POS_GoalTrigger, 15.0f))
+                switch (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
                 {
                     case 0: // Returns 0 - Nobody is on the sphere.
                         
@@ -96,7 +96,7 @@ void EXEC_GoalRing(task* tp)
                 }
             }
 
-            else if (CheckCollisionP(&POS_GoalTrigger, 15.0f))
+            else if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
             {
                 LoadLevelResults();
                 
