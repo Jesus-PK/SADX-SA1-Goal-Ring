@@ -25,8 +25,11 @@ extern "C"
 
 		StartPosition STARTPOS_TreeTops00 = { LevelIDs_WindyValley, 2, { 5820.0f, -10700.0f, -735.0f }, 0x0};
 		StartPosition STARTPOS_TreeTops01 = { LevelIDs_SkyDeck, 0, { 885.0f, -330.0f, 5478.0f }, 0x0 };
+		StartPosition STARTPOS_TreeTops02 = { LevelIDs_SpeedHighway, 2, { -230.0f, 155.0f, -1700.0f }, 0x0 };
+
 		HelperFunctionsGlobal.RegisterStartPosition(Characters_Tails, STARTPOS_TreeTops00);
 		HelperFunctionsGlobal.RegisterStartPosition(Characters_Tails, STARTPOS_TreeTops01);
+		HelperFunctionsGlobal.RegisterStartPosition(Characters_Sonic, STARTPOS_TreeTops02);
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };
