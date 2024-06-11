@@ -7,6 +7,8 @@
 
 	#include "ModelInfo.h"
 
+	#include "multiapi.h"
+
 	#include "mod.h"
 
 	#include "goalring.h"
