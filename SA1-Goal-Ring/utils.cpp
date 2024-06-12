@@ -3,12 +3,12 @@
 //	Bools and code to check if certain mods or config options are enabled:
 
 bool HD_GUI = false;
-bool Multiplayer = false;
+bool SADX_Multiplayer = false;
 
 void CheckActiveMods()
 {
 	HD_GUI = HelperFunctionsGlobal.Mods->find("sadx-hd-gui") != nullptr;
-    Multiplayer = HelperFunctionsGlobal.Mods->find("sadx-multiplayer") != nullptr;
+    SADX_Multiplayer = HelperFunctionsGlobal.Mods->find("sadx-multiplayer") != nullptr;
 }
 
 

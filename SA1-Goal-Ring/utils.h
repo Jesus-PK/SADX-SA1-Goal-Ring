@@ -9,7 +9,7 @@
 //	Bools and code to check if certain mods or config options are enabled:
 
 extern bool HD_GUI;
-extern bool Multiplayer;
+extern bool SADX_Multiplayer;
 
 void CheckActiveMods();
 
