@@ -15,6 +15,7 @@ ModelInfo* MDL_GoalRing = nullptr;
 CCL_INFO COL_GoalRing = { 0, CollisionShape_Sphere, 0xF0, 0x20, 0x400, { 0.0f, 17.5f, 0.0f }, 8.0f, 0.0f, 0.0f, 0.0f, 0, 0, 0 };
 
 NJS_POINT3 POS_GoalTrigger = { 0, 0, 0 };
+float SCL_GoalTrigger = 20.0f;
 
 
 //	Goal Ring - Main:
@@ -45,7 +46,7 @@ void DISPLAY_GoalRing(task* tp)
 
 uint32_t GetPlayerID()
 {
-	uint32_t PlayerID = IsPlayerInSphere(&POS_GoalTrigger, 20.0f) - 1;
+	uint32_t PlayerID = IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger) - 1;
 
 	return PlayerID;
 }
@@ -55,7 +56,7 @@ void COOP_GoalRing(task* tp)
     auto twp = tp->twp;
     auto PlayerID = GetPlayerID();
 
-    if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
+    if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
     {
         if (PlayerID != AISonk_ID)
         {
@@ -80,7 +81,7 @@ void BATTLE_GoalRing(task* tp)
     auto twp = tp->twp;   
     auto PlayerID = GetPlayerID();
 
-    if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
+    if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
     {
         multi_set_winner(PlayerID);
         LoadLevelResults();
@@ -96,7 +97,7 @@ void SINGLEPLAYER_GoalRing(task* tp)
 
     if (CurrentCharacter == Characters_Tails)
     {
-        if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
+        if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
         {
             if (PlayerID != 1)
             {
@@ -116,7 +117,7 @@ void SINGLEPLAYER_GoalRing(task* tp)
         }
     }
 
-    else if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
+    else if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
     {
         LoadLevelResults();
 
