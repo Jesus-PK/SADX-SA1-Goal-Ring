@@ -43,24 +43,42 @@ void DISPLAY_GoalRing(task* tp)
     njPopMatrix(1u);
 }
 
+uint32_t GetPlayerID()
+{
+	uint32_t PlayerID = IsPlayerInSphere(&POS_GoalTrigger, 20.0f) - 1;
+
+	return PlayerID;
+}
+
 void COOP_GoalRing(task* tp)
 {
     auto twp = tp->twp;
+    auto PlayerID = GetPlayerID();
 
     if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
     {
-        SetTailsRaceVictory();
-        LoadLevelResults();
+        if (PlayerID != AISonk_ID)
+        {
+            SetTailsRaceVictory();
+            LoadLevelResults();
 
-        twp->mode = 2;
+            twp->mode = 2;
+        }
+
+        else
+        {
+            SetOpponentRaceVictory();
+            LoadLevelResults();
+
+            twp->mode = 2;
+        }
     }
 }
 
 void BATTLE_GoalRing(task* tp)
 {
-    auto twp = tp->twp;
-    
-    int PlayerID = IsPlayerInSphere(&POS_GoalTrigger, 20.0f) - 1;
+    auto twp = tp->twp;   
+    auto PlayerID = GetPlayerID();
 
     if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
     {
@@ -79,10 +97,6 @@ void SINGLEPLAYER_GoalRing(task* tp)
     {
         switch (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
         {
-            case 0: // Returns 0 - Nobody is on the sphere.
-
-                break;
-
             case 1: // Return 1 - Player ID 1 is on the sphere.
 
                 SetTailsRaceVictory();
@@ -92,7 +106,7 @@ void SINGLEPLAYER_GoalRing(task* tp)
 
                 break;
 
-            default: // Returns 2 - Player ID 2 is on the sphere (Sonk AI).
+            case 2: // Returns 2 - Player ID 2 is on the sphere (Sonk AI).
 
                 SetOpponentRaceVictory();
                 LoadLevelResults();
