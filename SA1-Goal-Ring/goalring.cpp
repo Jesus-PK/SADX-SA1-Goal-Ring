@@ -92,28 +92,27 @@ void BATTLE_GoalRing(task* tp)
 void SINGLEPLAYER_GoalRing(task* tp)
 {
     auto twp = tp->twp;
+    auto PlayerID = GetPlayerID();
 
     if (CurrentCharacter == Characters_Tails)
     {
-        switch (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
+        if (IsPlayerInSphere(&POS_GoalTrigger, 20.0f))
         {
-            case 1: // Return 1 - Player ID 1 is on the sphere.
-
+            if (PlayerID != 1)
+            {
                 SetTailsRaceVictory();
                 LoadLevelResults();
 
                 twp->mode = 2;
+            }
 
-                break;
-
-            case 2: // Returns 2 - Player ID 2 is on the sphere (Sonk AI).
-
+            else
+            {
                 SetOpponentRaceVictory();
                 LoadLevelResults();
 
                 twp->mode = 2;
-
-                break;
+            }
         }
     }
 
@@ -171,7 +170,6 @@ void EXEC_GoalRing(task* tp)
             MULTI_GoalRing(tp);
             
             DrawShadow((EntityData1*)twp, 1.0f);
-
             twp->ang.y += 500;
             
             EntryColliList(twp);
