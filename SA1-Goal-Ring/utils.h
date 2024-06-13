@@ -36,7 +36,7 @@ enum CollisionShapes
 
 //	Player IDs:
 
-#define PLAYER_MAX 4
+#define PLAYER_MAX 8
 #define AISonk_ID 7
 
 

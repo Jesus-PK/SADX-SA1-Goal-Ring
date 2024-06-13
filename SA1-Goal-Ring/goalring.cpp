@@ -79,8 +79,7 @@ void COOP_GoalRing(task* tp)
 
             else
             {
-                SetOpponentRaceVictory();
-                LoadLevelResults();
+                StartLevelCutscene(1); // This function kicks you out back to the co-op stage select screen.
 
                 twp->mode = 2;
             }
