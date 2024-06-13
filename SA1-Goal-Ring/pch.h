@@ -13,6 +13,7 @@
 
 	#include "goalring.h"
 	#include "graphics.h"
+	#include "teleport.h"
 	#include "utils.h"
 
 #endif

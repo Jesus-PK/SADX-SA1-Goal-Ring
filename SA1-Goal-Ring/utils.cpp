@@ -37,7 +37,7 @@ ModelInfo* LoadBasicModel(const char* name)
 }
 
 
-//  Functions for a custom Sphere check:
+//  Functions for a custom sphere check:
 
 float GetDistance(NJS_VECTOR* v1, NJS_VECTOR* v2)
 {

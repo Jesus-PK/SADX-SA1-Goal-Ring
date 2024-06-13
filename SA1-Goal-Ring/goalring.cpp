@@ -18,7 +18,17 @@ NJS_POINT3 POS_GoalTrigger = { 0, 0, 0 };
 float SCL_GoalTrigger = 20.0f;
 
 
-//	Goal Ring - Main:
+//  Get Player ID from the custom sphere trigger:
+
+uint32_t GetPlayerID()
+{
+    uint32_t PlayerID = IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger) - 1;
+
+    return PlayerID;
+}
+
+
+//	Goal Ring - Display:
 
 void DISPLAY_GoalRing(task* tp)
 {
@@ -44,35 +54,47 @@ void DISPLAY_GoalRing(task* tp)
     njPopMatrix(1u);
 }
 
-uint32_t GetPlayerID()
-{
-	uint32_t PlayerID = IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger) - 1;
 
-	return PlayerID;
-}
+//  Goal Ring - Sub exec functions for co-op mode, battle mode and singleplayer mode: 
 
 void COOP_GoalRing(task* tp)
 {
     auto twp = tp->twp;
     auto PlayerID = GetPlayerID();
 
-    if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
+    if (CurrentCharacter == Characters_Tails)
     {
-        if (PlayerID != AISonk_ID)
+        if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
         {
-            SetTailsRaceVictory();
-            LoadLevelResults();
+            if (PlayerID != AISonk_ID)
+            {
+                multi_set_winner(PlayerID);
+                MovePlayersToWinnerPos(&twp->pos);
 
-            twp->mode = 2;
+                SetTailsRaceVictory();
+                LoadLevelResults();
+
+                twp->mode = 2;
+            }
+
+            else
+            {
+                SetOpponentRaceVictory();
+                LoadLevelResults();
+
+                twp->mode = 2;
+            }
         }
+    }
+    
+    else if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
+    {
+        multi_set_winner(PlayerID);
+        MovePlayersToWinnerPos(&twp->pos);
 
-        else
-        {
-            SetOpponentRaceVictory();
-            LoadLevelResults();
-
-            twp->mode = 2;
-        }
+        LoadLevelResults();
+        
+        twp->mode = 2;
     }
 }
 
@@ -125,7 +147,7 @@ void SINGLEPLAYER_GoalRing(task* tp)
     }
 }
 
-void MULTI_GoalRing(task* tp)
+void FUNC_GoalRing(task* tp) // This is the main function that groups all individual ones and the one that will be called on the goal ring main exec.
 {
     auto twp = tp->twp;
     
@@ -168,7 +190,7 @@ void EXEC_GoalRing(task* tp)
 
         case 1:
 
-            MULTI_GoalRing(tp);
+            FUNC_GoalRing(tp);
             
             DrawShadow((EntityData1*)twp, 1.0f);
             twp->ang.y += 500;
