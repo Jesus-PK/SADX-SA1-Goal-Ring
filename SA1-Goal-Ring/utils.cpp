@@ -4,11 +4,24 @@
 
 bool HD_GUI = false;
 bool SADX_Multiplayer = false;
+bool SA2_GoalRing = false;
 
 void CheckActiveMods()
 {
 	HD_GUI = HelperFunctionsGlobal.Mods->find("sadx-hd-gui") != nullptr;
     SADX_Multiplayer = HelperFunctionsGlobal.Mods->find("sadx-multiplayer") != nullptr;
+
+    SA2_GoalRing = GetModuleHandle(L"GoalRing") != nullptr;
+}
+
+void CheckSA2GoalRing()
+{
+    if (SA2_GoalRing)
+    {
+        MessageBox(WindowHandle,
+            L"WARNING! The (Goal Ring Mod) has been enabled at the same time as the (SA1 Goal Ring) mod.\n\nThese mods are standalone works and do not require each other to work. Keeping both enabled might cause compatibility issues.\n\nPlease exit the game, disable either of them, then try again.",
+            L"SA1 Goal Ring: Compatibility Warning", MB_OK | MB_ICONERROR);
+    }
 }
 
 

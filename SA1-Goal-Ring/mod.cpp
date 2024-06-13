@@ -13,6 +13,7 @@ extern "C"
 		HelperFunctionsGlobal = helperFunctions;
 
 		CheckActiveMods();
+		CheckSA2GoalRing();
 
 		
 		//	Init Mod:

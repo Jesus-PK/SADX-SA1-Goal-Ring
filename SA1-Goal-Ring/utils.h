@@ -12,6 +12,7 @@ extern bool HD_GUI;
 extern bool SADX_Multiplayer;
 
 void CheckActiveMods();
+void CheckSA2GoalRing();
 
 
 //	Functions for loading Models and Animations:
