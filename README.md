@@ -2,7 +2,7 @@
 
 ## Overview:
 
-This mod replaces all Capsules in the game with SA1 Styled Goal Rings, it also includes custom Mission Cards and Multiplayer support. You can find more details about this mod in [**GameBanana**]().
+This mod replaces all Capsules in the game with SA1 Styled Goal Rings, it also includes custom Mission Cards and Multiplayer support. You can find more details about this mod in [**GameBanana**](https://gamebanana.com/mods/520367).
 
 **Features:**
 * A custom SA1 Styled Goal Ring model, edited from the official model used in the Y2K DLC. It replaces all instances of the vanilla Capsule in the game through code, so this mod supports custom levels if they use the vanilla Capsule as their end objective.
@@ -12,11 +12,11 @@ This mod replaces all Capsules in the game with SA1 Styled Goal Rings, it also i
 ## Compatibility Notes:
 * This mod is a standalone package, it doesn't require any dependencies.
 * It's recommended to load it on the bottom of the list (or at least below mods that might edit the vanilla Capsule model or functions such as Dreamcast Conversion).
-* If you encounter any issues, you can use the [**Issues**](https://github.com/Jesus-PK/SADX-SA1-Goal-Ring/issues) tab or [**GameBanana**]() page to report any issues.
+* If you encounter any issues, you can use the [**Issues**](https://github.com/Jesus-PK/SADX-SA1-Goal-Ring/issues) tab or [**GameBanana**](https://gamebanana.com/mods/520367) page to report any issues.
 
 ## Repository Notes:
 
-This repository hosts both the code and playable versions of this mod. You can find them in the [**Releases**](https://github.com/Jesus-PK/SADX-SA1-Goal-Ring/releases) tab or [**GameBanana**]() page.
+This repository hosts both the code and playable versions of this mod. You can find them in the [**Releases**](https://github.com/Jesus-PK/SADX-SA1-Goal-Ring/releases) tab or [**GameBanana**](https://gamebanana.com/mods/520367) page.
 
 Cloning this repository should result in a buildable .dll project of this mod without any additional tweaks needed, though there's a few things worth noting:
 
