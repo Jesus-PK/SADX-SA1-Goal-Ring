@@ -68,9 +68,6 @@ void COOP_GoalRing(task* tp)
         {
             if (PlayerID != AISonk_ID)
             {
-                multi_set_winner(PlayerID);
-                MovePlayersToWinnerPos(&twp->pos);
-
                 SetTailsRaceVictory();
                 LoadLevelResults();
 
@@ -88,9 +85,6 @@ void COOP_GoalRing(task* tp)
     
     else if (IsPlayerInSphere(&POS_GoalTrigger, SCL_GoalTrigger))
     {
-        multi_set_winner(PlayerID);
-        MovePlayersToWinnerPos(&twp->pos);
-
         LoadLevelResults();
         
         twp->mode = 2;
