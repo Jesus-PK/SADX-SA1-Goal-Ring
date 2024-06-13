@@ -45,7 +45,7 @@ void DISPLAY_GoalRing(task* tp)
     njPushMatrix(0);
     
     njTranslate(0, twp->pos.x, twp->pos.y + 5.0f, twp->pos.z);
-    njRotateXYZ(0, twp->ang.x, -twp->ang.y, twp->ang.z);
+    njRotateY(0, -twp->ang.y);
     
     DrawModel(MDL_GoalRing->getmodel()->basicdxmodel); // Outer Ring
     late_DrawModel(MDL_GoalRing->getmodel()->child->basicdxmodel, LATE_LIG); // Inner Ring (Background)
@@ -55,7 +55,7 @@ void DISPLAY_GoalRing(task* tp)
 }
 
 
-//  Goal Ring - Sub exec functions for co-op mode, battle mode and singleplayer mode: 
+//  Goal Ring - Sub-Exec functions for co-op mode, battle mode and singleplayer mode: 
 
 void COOP_GoalRing(task* tp)
 {
@@ -147,7 +147,7 @@ void SINGLEPLAYER_GoalRing(task* tp)
     }
 }
 
-void FUNC_GoalRing(task* tp) // This is the main function that groups all individual ones and the one that will be called on the goal ring main exec.
+void FUNC_GoalRing(task* tp) // This is the main function that groups all the sub-exec functions, it's the one that will be called on the goal ring main exec.
 {
     auto twp = tp->twp;
     
@@ -166,6 +166,9 @@ void FUNC_GoalRing(task* tp) // This is the main function that groups all indivi
     else
         SINGLEPLAYER_GoalRing(tp);
 }
+
+
+//  Goal Ring - Main Exec & Init:
 
 void EXEC_GoalRing(task* tp)
 {
@@ -193,7 +196,7 @@ void EXEC_GoalRing(task* tp)
             FUNC_GoalRing(tp);
             
             DrawShadow((EntityData1*)twp, 1.0f);
-            twp->ang.y += 500;
+            twp->ang.y -= 500;
             
             EntryColliList(twp);
 
